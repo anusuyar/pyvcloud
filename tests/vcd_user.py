@@ -14,8 +14,7 @@ class TestUser(TestCase):
         role_href = role[0]['href']
         user_name = self.config['vcd']['user_name'].join(random.sample(string.ascii_lowercase, 8))
         user = org.create_user(user_name, "password", role_href, "Full Name", "Description", "xyz@mail.com",
-                               "408-487-9087", "test_user_im", "xyz@mail.com", "Alert Vcd:",
-                               0, 0, False, False, False, False, True)
+                               "408-487-9087", "test_user_im", "xyz@mail.com", "Alert Vcd:", is_enabled=True)
         assert user_name == user.get('name')
 
 

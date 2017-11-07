@@ -374,9 +374,13 @@ class Org(object):
             media_type=EntityType.CAPTURE_VAPP_PARAMS.value,
             contents=contents)
 
-    def create_user(self, user_name, password, role_href, full_name, description, email, telephone, im, alert_email,
-                    alert_email_prefix, stored_vm_quota, deployed_vm_quota, is_group_role,
-                    is_default_cached, is_external, is_alert_enabled, is_enabled):
+    def create_user(self,
+                    user_name, password, role_href, full_name='',
+                    description='', email='', telephone='', im='',
+                    alert_email='', alert_email_prefix='', stored_vm_quota=0,
+                    deployed_vm_quota=0, is_group_role=False,
+                    is_default_cached=False, is_external=False,
+                    is_alert_enabled=False, is_enabled=False):
         self.resource = self.client.get_resource(self.href_admin)
         user = E.User(
             E.Description(description),
