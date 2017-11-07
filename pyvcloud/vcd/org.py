@@ -381,7 +381,7 @@ class Org(object):
                     deployed_vm_quota=0, is_group_role=False,
                     is_default_cached=False, is_external=False,
                     is_alert_enabled=False, is_enabled=False):
-        self.resource = self.client.get_resource(self.href_admin)
+        resource_admin = self.client.get_resource(self.href_admin)
         user = E.User(
             E.Description(description),
             E.FullName(full_name),
@@ -401,7 +401,7 @@ class Org(object):
             E.Password(password),
             name=user_name)
         return self.client.post_linked_resource(
-            self.resource,
+            resource_admin,
             RelationType.ADD,
             EntityType.USER.value,
             user)
