@@ -15,7 +15,7 @@ class TestRole(TestCase):
         logged_in_org = self.client.get_org()
         org = Org(self.client, resource=logged_in_org)
         role = org.get_role(self.config['vcd']['role_name'])
-        assert self.config['vcd']['role_name'] == role[0]['name']
+        assert self.config['vcd']['role_name'] == role.get('name')
 
 
 if __name__ == '__main__':

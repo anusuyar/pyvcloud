@@ -17,6 +17,7 @@ from lxml import etree
 from lxml import objectify
 import os
 from pyvcloud.vcd.client import _TaskMonitor
+from pyvcloud.vcd.client import MissingRecordException
 from pyvcloud.vcd.client import E
 from pyvcloud.vcd.client import E_OVF
 from pyvcloud.vcd.client import EntityType
@@ -427,16 +428,13 @@ class Org(object):
         if self.resource is None:
             self.resource = self.client.get_resource(self.href)
         resource_type = 'adminRole'
-        result = []
-        role = self.client.get_typed_query(
-            resource_type,
-            query_result_format=QueryResultFormat.RECORDS,
-            equality_filter=('name', role_name),
-            qfilter='orgName==%s' %
-                    self.resource.get('name'))
-        records = list(role.execute())
-        for r in records:
-            result.append(to_dict(r,
-                                  resource_type=resource_type,
-                                  exclude=['isReadOnly']))
-        return result
+        try:
+            role = self.client.get_typed_query(
+                resource_type,
+                query_result_format=QueryResultFormat.RECORDS,
+                equality_filter=('name', role_name),
+                qfilter='orgName==%s' %
+                        self.resource.get('name')).find_unique()
+            return role
+        except MissingRecordException:
+            raise Exception('Role \'%s\' does not exist.' % role_name)
