@@ -417,11 +417,10 @@ class Org(object):
             qfilter='orgName==%s' %
                     self.resource.get('name'))
         records = list(q.execute())
-        if len(records) > 0:
-            for r in records:
-                result.append(to_dict(r,
-                                      resource_type=resource_type,
-                                      exclude=['org']))
+        for r in records:
+            result.append(to_dict(r,
+                                  resource_type=resource_type,
+                                  exclude=['org']))
         return result
 
     def get_role(self, role_name):
@@ -436,9 +435,8 @@ class Org(object):
             qfilter='orgName==%s' %
                     self.resource.get('name'))
         records = list(role.execute())
-        if len(records) > 0:
-            for r in records:
-                result.append(to_dict(r,
-                                      resource_type=resource_type,
-                                      exclude=['isReadOnly']))
+        for r in records:
+            result.append(to_dict(r,
+                                  resource_type=resource_type,
+                                  exclude=['isReadOnly']))
         return result
