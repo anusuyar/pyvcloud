@@ -17,12 +17,12 @@ from lxml import etree
 from lxml import objectify
 import os
 from pyvcloud.vcd.client import _TaskMonitor
-from pyvcloud.vcd.client import MissingRecordException
 from pyvcloud.vcd.client import E
 from pyvcloud.vcd.client import E_OVF
 from pyvcloud.vcd.client import EntityType
 from pyvcloud.vcd.client import find_link
 from pyvcloud.vcd.client import get_links
+from pyvcloud.vcd.client import MissingRecordException
 from pyvcloud.vcd.client import QueryResultFormat
 from pyvcloud.vcd.client import RelationType
 from pyvcloud.vcd.utils import to_dict
